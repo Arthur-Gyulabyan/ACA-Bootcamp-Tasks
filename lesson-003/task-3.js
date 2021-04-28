@@ -1,6 +1,6 @@
 // Swapping variable values
-let a = 10,
-  b = 3;
+let a = 10;
+let b = 3;
 
 let t = a;
 a = b;
