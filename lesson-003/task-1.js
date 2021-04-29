@@ -3,7 +3,7 @@ let admin;
 let name;
 
 // Assigning values to the variables
-name = "John";
+name = 'John';
 admin = name;
 
 // Logging the value of "admin"
