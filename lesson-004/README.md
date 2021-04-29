@@ -2,8 +2,6 @@
 
 ## Reference Type, Branching, Loops
 
----
-
 &nbsp;
 
 ### About file names
