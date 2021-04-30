@@ -2,22 +2,22 @@
 
 function findIndex(arr, num) {
   let minAbsolute = Math.abs(num - arr[0]);
-  let n = arr[0];
+  let index = 0;
 
-  for (let value of arr) {
-    if (value === num) {
-      // Return index if equal value have been found
-      return arr.indexOf(value);
+  for (let i = 0; i < arr.length; i++) {
+    if (arr[i] === num) {
+      // Check for equality
+      return i;
     } else {
-      // Find the closest value
-      if (minAbsolute > Math.abs(num - value)) {
-        minAbsolute = Math.abs(num - value);
-        n = value;
+      // Find the index of closest
+      if (minAbsolute > Math.abs(num - arr[i])) {
+        minAbsolute = Math.abs(num - arr[i]);
+        index = i;
       }
     }
   }
 
-  return arr.indexOf(n);
+  return index;
 }
 
 console.log(findIndex([21, -9, 15, 2116, -71, 33], -71)); // 4
