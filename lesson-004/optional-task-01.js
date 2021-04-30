@@ -3,7 +3,7 @@
 function findDifference(number) {
   const digitsArr = [];
 
-  // Get every digit of a number without converting it to string (good code I think :))
+  // Get every digit of a number without converting it to string (good code written with help of Aramayis :))
   for (let i = 10; i <= 10 * number; i *= 10) {
     digitsArr.push(Math.trunc(((number % i) / i) * 10));
   }
