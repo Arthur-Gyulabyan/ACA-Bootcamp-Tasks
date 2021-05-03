@@ -15,6 +15,6 @@ function myParseInt(str) {
 }
 
 console.log(myParseInt('a0011b1')); // NaN
-console.log(parseInt('23.231')); // 23
-console.log(parseInt('18px')); // 18
-console.log(parseInt('')); // NaN
+console.log(myParseInt('23.231')); // 23
+console.log(myParseInt('18px')); // 18
+console.log(myParseInt('')); // NaN
