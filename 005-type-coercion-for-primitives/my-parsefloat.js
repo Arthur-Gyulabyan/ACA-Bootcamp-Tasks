@@ -4,7 +4,7 @@ function myParseFloat(str) {
   let numString = '';
   let firstDotFound = false; // This variable will indicate, whether the first dot appeared or not
 
-  for (let char of str) {
+  for (let char of str.trim()) {
     if (char === '.') {
       // Check if the current dot is the first in the string or not
       if (firstDotFound) {
@@ -18,7 +18,7 @@ function myParseFloat(str) {
       }
     }
 
-    if (!isNaN(char)) {
+    if (!isNaN(char) && char !== ' ') {
       numString += char;
     } else {
       break;
@@ -32,3 +32,4 @@ console.log(myParseFloat('11.5cm')); // 11.5
 console.log(myParseFloat('23.a231')); // 23
 console.log(myParseFloat('18.2.p3px.231.23')); // 18.2
 console.log(myParseFloat('')); // NaN
+console.log(myParseFloat('  00 1')); // 0
