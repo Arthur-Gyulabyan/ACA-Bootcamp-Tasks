@@ -8,10 +8,15 @@ function binaryToDecimal(binaryNum) {
 
   // Convert binary to decimal
   for (let i = 0; i < digitsArr.length; i++) {
-    decimalNum += +digitsArr[i] * 2 ** i;
+    if (Number(digitsArr[i]) > 1) {
+      return 'Number is not binary.';
+    }
+
+    decimalNum += Number(digitsArr[i]) * 2 ** i;
   }
   return decimalNum;
 }
 
 console.log(binaryToDecimal(101110)); // 46
 console.log(binaryToDecimal(101)); // 5
+console.log(binaryToDecimal(10201)); // "Number is not binary."
