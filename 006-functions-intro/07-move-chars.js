@@ -7,12 +7,8 @@ function moveChars(str) {
     if (str[i + 2]) {
       // Substring has the third char
       charsMoved += str[i + 1] + str[i + 2] + str[i];
-    } else if (str[i + 1]) {
-      // Substring has two chars
-      charsMoved += str[i] + str[i + 1];
     } else {
-      // Substring has one char
-      charsMoved += str[i];
+      charsMoved += str.slice(i);
     }
   }
 
