@@ -9,8 +9,9 @@ const sumOfQuadratics = (numbers) => {
     }
   }
 
-  return sum;
+  return sum ? sum : 'There is no even number in array!';
 };
 
 console.log(sumOfQuadratics([3, 4, -4, 2, 1, 6, 10])); // 172
 console.log(sumOfQuadratics([1, 2, 3, 4, 5, 6])); // 56
+console.log(sumOfQuadratics([1, 3, 5])); // "There is no even number in array!"
