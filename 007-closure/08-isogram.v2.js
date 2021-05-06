@@ -4,6 +4,8 @@ function checkIsogram(word) {
   let isIsogram = true;
 
   for (let i = 0; i < lowerCaseWord.length; i++) {
+    if (lowerCaseWord[i] === ' ') continue;
+
     if (lowerCaseWord.slice(i + 1).indexOf(lowerCaseWord[i]) !== -1) {
       isIsogram = false;
     }
@@ -15,3 +17,4 @@ function checkIsogram(word) {
 console.log(checkIsogram('Arthur')); // "Arthur" is NOT an isogram!
 console.log(checkIsogram('prefix')); // "prefix" is an isogram!
 console.log(checkIsogram('beaUtiful')); // "beaUtiful" is NOT an isogram!
+console.log(checkIsogram('The big dwarf only jumps.')); 
