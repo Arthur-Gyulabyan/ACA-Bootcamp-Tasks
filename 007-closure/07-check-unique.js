@@ -8,8 +8,10 @@ const checkUnique = (arr) => {
     for (let j = i + 1; j < arr.length; j++) {
       if (arr[i] === arr[j]) {
         isUnique = false;
+        break; // Exit loop if non unique found
       }
     }
+    if (!isUnique) break;
   }
 
   return isUnique ? 'Array consists of unique elements.' : 'Array has non unique element(s).';
