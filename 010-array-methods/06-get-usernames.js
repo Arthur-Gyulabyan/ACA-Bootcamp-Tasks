@@ -11,8 +11,9 @@ const users = [
   },
 ];
 
+const mapper = el => el.username;
+
 const getUserNames = (users) => {
-  const mapper = el => el.username;
 
   return users.map(mapper);
 };
