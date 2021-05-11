@@ -13,9 +13,6 @@ const users = [
 
 const mapper = el => el.username;
 
-const getUserNames = (users) => {
-
-  return users.map(mapper);
-};
+const getUserNames = users => users.map(mapper);
 
 console.log(getUserNames(users)); // ['Yuri Gagarin', 'Nil Armstrong']
