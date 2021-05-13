@@ -1,4 +1,4 @@
-// Write a function which filter the element of element by given range
+// Write a function which filters the elements of array by given range
 
 const filterRange = (arr, start, end) => {
   return arr.filter((el) => el >= start && el <= end);
