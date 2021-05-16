@@ -80,3 +80,32 @@ function checkForMine(coordinate, field) {
 
   return field[x][y] === 'm';
 }
+
+function runMinesWeeper(size) {
+  const field = [];
+  let gameEnded = false;
+
+  for (let i = 0; i < size; i++) {
+    field.push([]);
+    field[i].length = size;
+  }
+
+  let coordinates = generatePos(size);
+  drawMineField(coordinates, field);
+  console.log(field);
+
+  while (gameEnded === false) {
+    const openedPoint = openPoint();
+    const isMine = checkForMine(openedPoint, field);
+
+    if (isMine) {
+      console.log('Boooooom!');
+      break;
+    } else {
+      console.log('You are lucky!');
+      field[openedPoint[0]][openedPoint[1]] = 'opened';
+    }
+  }
+}
+
+runMinesWeeper(10);
