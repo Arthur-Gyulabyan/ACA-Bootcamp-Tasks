@@ -46,3 +46,22 @@ function calcAttachedPoints(coordinate, field) {
     }
   });
 }
+
+function drawMineField(coordinates, field) {
+
+    // Fill the field with zeroes.
+    for (let i = 0; i < field.length; i++) {
+        field[i].fill(0);
+    }
+
+    // Place the mine and update its neighbour points
+    for (let i = 0; i < coordinates.length; i++) {
+        let x = coordinates[i][0];
+        let y = coordinates[i][1];
+
+        if (typeof field[x][y] === 'number') {
+            field[x][y] = 'm';
+            calcAttachedPoints([x, y], field);
+        }
+    }
+}
