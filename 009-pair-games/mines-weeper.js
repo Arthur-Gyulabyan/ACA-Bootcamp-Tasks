@@ -48,20 +48,35 @@ function calcAttachedPoints(coordinate, field) {
 }
 
 function drawMineField(coordinates, field) {
+  // Fill the field with zeroes.
+  for (let i = 0; i < field.length; i++) {
+    field[i].fill(0);
+  }
 
-    // Fill the field with zeroes.
-    for (let i = 0; i < field.length; i++) {
-        field[i].fill(0);
+  // Place the mine and update its neighbour points
+  for (let i = 0; i < coordinates.length; i++) {
+    let x = coordinates[i][0];
+    let y = coordinates[i][1];
+
+    if (typeof field[x][y] === 'number') {
+      field[x][y] = 'm';
+      calcAttachedPoints([x, y], field);
     }
+  }
+}
 
-    // Place the mine and update its neighbour points
-    for (let i = 0; i < coordinates.length; i++) {
-        let x = coordinates[i][0];
-        let y = coordinates[i][1];
+// Request the user for coordinate to be opened
+function openPoint() {
+  const x = +prompt('Insert the first coordinate');
+  const y = +prompt('Insert the second coordinate');
 
-        if (typeof field[x][y] === 'number') {
-            field[x][y] = 'm';
-            calcAttachedPoints([x, y], field);
-        }
-    }
+  return [x, y];
+}
+
+// Check the opened point
+function checkForMine(coordinate, field) {
+  let x = coordinate[0];
+  let y = coordinate[1];
+
+  return field[x][y] === 'm';
 }
