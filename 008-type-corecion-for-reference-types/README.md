@@ -59,7 +59,7 @@ and suppose that `f` isn't declared
     `true + a + b + c + d + e + f` => `Error!`  
     `false + 4` => `4`  
     `false + NaN` => `NaN`  
-    `false + 'hello'` => `falsehello`  
+    `false + 'hello'` => `"falsehello"`  
     `false + a + b + c + d + e + f` => `Error!`  
     `5 + 3` => `8`  
     `5 + NaN` => `NaN`  
@@ -67,3 +67,25 @@ and suppose that `f` isn't declared
     `5 + a + b + c + d + e + f` => `Error!`  
     `'hello' + NaN` => `"helloNaN"`  
     `'hello' + a + b + c + d + e + f` => `Error!`
+
+-   unary `-` operator
+    `-null` => `-0`  
+    `-undefined` => `NaN`  
+    `-true` => `-1`  
+    `-false` => `-0`  
+    `-5` => `-5`  
+    `-'hello'` => `NaN`  
+    `-'234'` => `-234`  
+    `-'234.32e3'` => `-234320`  
+    `-new Number(NaN)` => `NaN`  
+    `-new String('hello')` => `NaN`  
+    `-(/google.com/)` => `NaN`  
+    `-([])` => `-0`  
+    `-([2])` => `-2`  
+    `-([2, 3])` => `NaN`  
+    `-(function() { })` => `NaN`  
+    `-(a)` => `NaN`  
+    `-(b)` => `-3`  
+    `-(c)` => `NaN`  
+    `-(d)` => `-123`  
+    `-(e)` => `Error!`
