@@ -2,12 +2,12 @@
 
 const reverseString = (str) => {
     try {
-        let reversedStr = str.split('').reverse().join('');
-        console.log(reversedStr);
+        str = str.split('').reverse().join('');
     } catch (error) {
-        console.warn(error.message);
-        console.log(str);
+        console.log(error.message);
     }
+
+    console.log(str);
 };
 
 reverseString('Arthur'); // "ruthrA"
