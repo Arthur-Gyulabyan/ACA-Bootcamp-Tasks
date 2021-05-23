@@ -11,7 +11,6 @@ Function.prototype.myApply = function (context, argsArr) {
 function changeInfo(...args) {
     this.fullName = args[0];
     this.age = args[1];
-    return 'aa';
 }
 
 let user = {
