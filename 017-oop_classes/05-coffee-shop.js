@@ -52,6 +52,14 @@ CoffeeShop.prototype.cheapestItem = function () {
     return cheapest.name;
 };
 
+CoffeeShop.prototype.drinksOnly = function () {
+    return this.menu.filter(el => el.type === 'drink').map(el => el.name);
+};
+
+CoffeeShop.prototype.foodOnly = function () {
+    return this.menu.filter(el => el.type === 'food').map(el => el.name);
+};
+
 const menu = [
     { name: 'Pasta', type: 'food', price: 2500 },
     { name: 'Kebab', type: 'food', price: 800 },
@@ -78,3 +86,6 @@ seasons.fulfillOrder();
 console.log(seasons.listOrders()); // [] - all orders exhausted.
 
 console.log(seasons.cheapestItem()); // "Kebab"
+
+console.log(seasons.drinksOnly()); // ["Mojito", "Margarita"]
+console.log(seasons.foodOnly()); // ["Pasta", "Kebab", "Pizza"]
