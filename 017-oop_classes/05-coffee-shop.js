@@ -2,7 +2,7 @@
 const CoffeeShop = function (name, menu) {
     this.name = name;
     this.menu = menu;
-    this.order = [];
+    this.orders = [];
 };
 
 // Create function to add orders.
@@ -10,7 +10,7 @@ CoffeeShop.prototype.addOrder = function (orderName) {
     const menuNames = this.menu.map((el) => el.name);
 
     if (menuNames.includes(orderName)) {
-        this.order.push(orderName);
+        this.orders.push(orderName);
         console.log('Order Added!');
     } else {
         console.log('This item is currently unavailable!');
@@ -18,12 +18,16 @@ CoffeeShop.prototype.addOrder = function (orderName) {
 };
 
 CoffeeShop.prototype.fulfillOrder = function () {
-    if (this.order.length !== 0) {
-        const ready = this.order.shift();
+    if (this.orders.length !== 0) {
+        const ready = this.orders.shift();
         console.log(`The ${ready} is ready!`);
     } else {
         console.log('All orders have been fulfilled!');
     }
+};
+
+CoffeeShop.prototype.listOrders = function () {
+    return this.orders;
 };
 
 const menu = [
@@ -39,9 +43,13 @@ const seasons = new CoffeeShop('Pekin', menu);
 seasons.addOrder('Pizza');
 seasons.addOrder('Margarita');
 seasons.addOrder('Shawarma');
+
+console.log(seasons.listOrders()); // ["Pizza", "Margarita"]
+
 seasons.fulfillOrder();
 seasons.fulfillOrder();
 seasons.addOrder('Kebab');
 
 seasons.fulfillOrder();
-console.log(seasons);
+
+console.log(seasons.listOrders()); // [] - all orders exhausted.
