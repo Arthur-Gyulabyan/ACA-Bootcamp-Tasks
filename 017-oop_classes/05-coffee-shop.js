@@ -44,6 +44,14 @@ CoffeeShop.prototype.dueAmount = function () {
     return amount;
 };
 
+CoffeeShop.prototype.cheapestItem = function () {
+    let cheapest = this.menu[0];
+
+    this.menu.forEach((el) => (cheapest = cheapest.price > el.price ? el : cheapest));
+
+    return cheapest.name;
+};
+
 const menu = [
     { name: 'Pasta', type: 'food', price: 2500 },
     { name: 'Kebab', type: 'food', price: 800 },
@@ -68,3 +76,5 @@ seasons.addOrder('Kebab');
 seasons.fulfillOrder();
 
 console.log(seasons.listOrders()); // [] - all orders exhausted.
+
+console.log(seasons.cheapestItem()); // "Kebab"
