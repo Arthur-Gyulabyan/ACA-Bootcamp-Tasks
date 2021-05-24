@@ -30,6 +30,20 @@ CoffeeShop.prototype.listOrders = function () {
     return this.orders;
 };
 
+CoffeeShop.prototype.dueAmount = function () {
+    const amount = this.orders.reduce((acc, current) => {
+        this.menu.forEach((el) => {
+            if (el.name === current) {
+                acc += el.price;
+            }
+        });
+
+        return acc;
+    }, 0);
+
+    return amount;
+};
+
 const menu = [
     { name: 'Pasta', type: 'food', price: 2500 },
     { name: 'Kebab', type: 'food', price: 800 },
@@ -45,6 +59,7 @@ seasons.addOrder('Margarita');
 seasons.addOrder('Shawarma');
 
 console.log(seasons.listOrders()); // ["Pizza", "Margarita"]
+console.log(seasons.dueAmount()); // 4500
 
 seasons.fulfillOrder();
 seasons.fulfillOrder();
