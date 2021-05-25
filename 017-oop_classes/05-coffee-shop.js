@@ -68,7 +68,7 @@ const menu = [
     { name: 'Margarita', type: 'drink', price: 2500 },
 ];
 
-const seasons = new CoffeeShop('Pekin', menu);
+const seasons = new CoffeeShop('Seasons', menu);
 
 seasons.addOrder('Pizza');
 seasons.addOrder('Margarita');
