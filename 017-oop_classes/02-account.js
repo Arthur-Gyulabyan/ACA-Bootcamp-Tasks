@@ -37,7 +37,7 @@ class Account {
     }
 
     set balance(value) {
-        if (typeof value !== 'number' || Number.isNaN(value)) {
+        if (typeof value !== 'number' || Number.isNaN(value) || value < 0) {
             throw new Error('Invalid balance value!');
         }
 
