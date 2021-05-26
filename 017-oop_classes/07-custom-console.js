@@ -34,12 +34,12 @@ class CustomConsole {
         return argsStr;
     }
 
-    history() {
+    history(start, end) {
         if (this.historyArr.length === 0) {
             return `History is empty.`;
         }
 
-        return this.historyArr;
+        return this.historyArr.slice(start, end);
     }
 
     clearHistory() {
