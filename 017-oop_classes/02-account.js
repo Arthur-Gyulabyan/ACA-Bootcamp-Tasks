@@ -53,9 +53,17 @@ class Account {
             throw new Error('Amount exceeded balance!');
         }
     }
+
+    transferTo(anotherAccount, amount) {
+        this.debit(amount);
+        anotherAccount.credit(amount);
+        return this.balance;
+    }
 }
 
 const savingAcc = new Account('Saving account', 2000);
-console.log(savingAcc.credit(1200)); // 3200
-console.log(savingAcc.debit(2200)); // 3200
-console.log(savingAcc.debit(1200)); // "Amount exceeded balance!"
+const cardAcc = new Account('Card account', 1000);
+// console.log(savingAcc.credit(1200)); // 3200
+// console.log(savingAcc.debit(2200)); // 3200
+// console.log(savingAcc.debit(1200)); // "Amount exceeded balance!"
+console.log(savingAcc.transferTo(cardAcc, 1000));
