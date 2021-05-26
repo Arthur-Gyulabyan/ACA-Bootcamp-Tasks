@@ -65,16 +65,24 @@ class Account {
     }
 
     toString() {
-        return `Account name: "${this.name}" | Balance: ${this.balance}$`;
+        return `${this.name}'s balance is $${this.balance}`;
     }
 }
 
-const savingAcc = new Account('Saving account', 2000);
-const cardAcc = new Account('Card account', 1000);
-// console.log(savingAcc.credit(1200)); // 3200
-// console.log(savingAcc.debit(2200)); // 3200
-// console.log(savingAcc.debit(1200)); // "Amount exceeded balance!"
-console.log(savingAcc.transferTo(cardAcc, 1000));
+let savingAcc = new Account('Saving account', 2000);
+let cardAcc = new Account('Card account', 1000);
+console.log(savingAcc); // Account { id: 0, _name: 'Saving account', _balance: 2000 }
+console.log(cardAcc); // Account { id: 1, _name: 'Card account', _balance: 1000 }
+console.log(savingAcc.balance); // 2000
+console.log(savingAcc.credit(400)); // 2400
+console.log(savingAcc.balance); // 2400
+console.log(savingAcc.debit(9000)); // "Amount exceeded balance!"
+console.log(savingAcc.transferTo(cardAcc, 1000)); // 1400
+console.log(savingAcc.balance); // 1400
+console.log(cardAcc.balance); // 2000
 
+let anotherAcc = savingAcc;
+
+console.log(Account.identifyAccounts(savingAcc, anotherAcc)); // true
 console.log(Account.identifyAccounts(savingAcc, cardAcc)); // false
-console.log(savingAcc.toString());
+console.log(savingAcc.toString()); // Saving account's balance is $1400.
