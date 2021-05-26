@@ -63,6 +63,10 @@ class Account {
         anotherAccount.credit(amount);
         return this.balance;
     }
+
+    toString() {
+        return `Account name: "${this.name}" | Balance: ${this.balance}$`;
+    }
 }
 
 const savingAcc = new Account('Saving account', 2000);
@@ -73,3 +77,4 @@ const cardAcc = new Account('Card account', 1000);
 console.log(savingAcc.transferTo(cardAcc, 1000));
 
 console.log(Account.identifyAccounts(savingAcc, cardAcc)); // false
+console.log(savingAcc.toString());
