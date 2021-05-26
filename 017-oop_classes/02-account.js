@@ -12,6 +12,10 @@ class Account {
     // Generator for id
     static counter = 0;
 
+    static identifyAccounts(accountFirst, accountSecond) {
+        return accountFirst.id === accountSecond.id;
+    }
+
     get id() {
         return this._id;
     }
@@ -67,3 +71,5 @@ const cardAcc = new Account('Card account', 1000);
 // console.log(savingAcc.debit(2200)); // 3200
 // console.log(savingAcc.debit(1200)); // "Amount exceeded balance!"
 console.log(savingAcc.transferTo(cardAcc, 1000));
+
+console.log(Account.identifyAccounts(savingAcc, cardAcc)); // false
