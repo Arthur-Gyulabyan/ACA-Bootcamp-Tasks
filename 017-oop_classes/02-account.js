@@ -48,6 +48,7 @@ class Account {
     debit(amount) {
         if (this.balance - amount >= 0) {
             this.balance -= amount;
+            return this.balance;
         } else {
             throw new Error('Amount exceeded balance!');
         }
@@ -55,4 +56,6 @@ class Account {
 }
 
 const savingAcc = new Account('Saving account', 2000);
-console.log(savingAcc);
+console.log(savingAcc.credit(1200)); // 3200
+console.log(savingAcc.debit(2200)); // 3200
+console.log(savingAcc.debit(1200)); // "Amount exceeded balance!"
