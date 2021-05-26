@@ -51,7 +51,7 @@ class Person {
     }
 
     set age(value) {
-        if (typeof value !== 'number' || (Number.isNaN(value) || value < 0 || value > 110)) {
+        if (typeof value !== 'number' || Number.isNaN(value) || value < 0 || value > 110) {
             throw new Error('Invalid age!');
         }
 
@@ -59,9 +59,15 @@ class Person {
     }
 
     toString() {
-        return `${this.firstName} ${this.lastName}, ${this.age} years old.`
+        return `${this.firstName} ${this.lastName}, ${this.age} years old.`;
     }
 }
 
 let user1 = new Person('Arthur', 'Gyulabyan', 'male', 22);
 console.log(user1.toString()); // Name Surname, 23 years old.
+
+class Student extends Person {
+    constructor(firstName, lastName, gender, age, year, fee, program = []) {
+        super(firstName, lastName, gender, age);
+    }
+}
