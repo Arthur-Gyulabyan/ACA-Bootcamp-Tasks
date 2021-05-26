@@ -57,8 +57,11 @@ class Person {
 
         this._age = value;
     }
+
+    toString() {
+        return `${this.firstName} ${this.lastName}, ${this.age} years old.`
+    }
 }
 
-let user1 = new Person('Name', 'Surname', 'female', 23);
-console.log(user1.age);
-console.log(user1.age = 11);
+let user1 = new Person('Arthur', 'Gyulabyan', 'male', 22);
+console.log(user1.toString()); // Name Surname, 23 years old.
