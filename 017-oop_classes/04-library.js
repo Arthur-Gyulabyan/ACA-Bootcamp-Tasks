@@ -1,14 +1,14 @@
 // Describe a model of library.
 
 class Book {
+    static idCounter = 0;
+
     constructor(title, author) {
         this._title = title;
         this._author = author;
 
         Book.idCounter++;
     }
-
-    static idCounter = 0;
 
     get title() {
         return this._title;
@@ -23,12 +23,10 @@ class Book {
     }
 
     toString() {
-        return `"${this.title}" -${this.author}`;
+        return `"${this.title}" - ${this.author}`;
     }
 }
 
-const book1 = new Book("You don't know JS", 'Kyle Simpson');
-console.log(book1.title);
 
 class LibraryBookBase extends Book {
     constructor(title, author) {
@@ -45,9 +43,6 @@ class LibraryBookBase extends Book {
     }
 }
 
-const baseBook1 = new LibraryBookBase('Harry Potter', 'J. K. Rowling');
-console.log(baseBook1.title);
-console.log(baseBook1.author);
 
 class LibraryBook extends Book {
     constructor(title, author, quantity) {
@@ -83,9 +78,6 @@ class LibraryBook extends Book {
     }
 }
 
-const libraryBook1 = new LibraryBook('The Old Man and the Sea', 'Ernest Hemingway', 12);
-console.log(libraryBook1.increaseQuantityBy(12));
-console.log(libraryBook1.decreaseQuantityBy(24));
 
 class ReaderBook extends Book {
     constructor(title, author, expirationDate) {
@@ -124,21 +116,18 @@ class ReaderBook extends Book {
     }
 }
 
-const readerBook1 = new LibraryBook('The Old Man and the Sea', 'Ernest Hemingway', '12-04');
-console.log(readerBook1);
-console.log(readerBook1.author);
-
 class Reader {
-    constructor(firstName, lastName, books) {
+    static idCounter = 0;
+
+    constructor(firstName, lastName, books = []) {
         this._firstName = firstName;
         this._lastName = lastName;
         this._books = books;
-        this.readerId = Reader.readerId;
+        this._readerId = Reader.idCounter;
 
-        Reader.readerId++;
+        Reader.idCounter++;
     }
 
-    static readerId = 0;
 
     get firstName() {
         return this._firstName;
@@ -169,7 +158,7 @@ class Reader {
     }
 
     set books(value) {
-        if(!Array.isArray(value)) {
+        if (!Array.isArray(value)) {
             throw new Error('Data about books is not represented!');
         }
 
@@ -177,7 +166,7 @@ class Reader {
     }
 
     borrowBook(book, library) {
-        if(library.doHaveBook(book) && book instanceof ReaderBook) {
+        if (library.doHaveBook(book) && book instanceof ReaderBook) {
             this.books.push(book);
         }
     }
@@ -206,7 +195,7 @@ class Library {
     }
 
     addBook(newBook) {
-        if(this.doHaveBook(newBook)) {
+        if (this.doHaveBook(newBook)) {
             newBook.quantity++;
         } else {
             this.books.push(newBook);
@@ -217,7 +206,7 @@ class Library {
 
     addBooks(newBooks) {
         newBooks.forEach(el => {
-            if(this.doHaveBook(el)) {
+            if (this.doHaveBook(el)) {
                 el.quantity++;
             } else {
                 this.books.push(el);
@@ -225,17 +214,5 @@ class Library {
         });
 
         return this.books;
-    }
-
-    checkReaderId(readerId) {
-        return this.readers.some(reader => reader.readerId === readerId);
-    }
-
-    lendBook(book, readerId) {
-        if(this.doHaveBook(book) && this.checkReaderId(readerId)) {
-            return new ReaderBook(book.title, book.author, 10);
-        } 
-
-        return null;
     }
 }
