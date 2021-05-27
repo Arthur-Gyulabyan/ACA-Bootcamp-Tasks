@@ -172,10 +172,11 @@ const rawStudent1 = {
 };
 
 const student1 = new Student(rawStudent1);
-console.log(student1.passExam('math', 70));
-console.log(student1.passExam('english', 90));
-console.log(student1.passExam('data structures', 90));
-console.log(student1.passExam('theory of computation', 10));
-console.log(student1.passExam('theory of computation', 100));
-console.log(student1.year); // 7
+
+console.log(student1.passExam('math', 70)); // Arthur Gyulabyan has exam(s) to pass yet.
+console.log(student1.passExam('english', 90)); // Arthur Gyulabyan has exam(s) to pass yet.
+console.log(student1.passExam('data structures', 90)); // Arthur Gyulabyan has exam(s) to pass yet.
+console.log(student1.passExam('theory of computation', 10)); // Arthur Gyulabyan has exam(s) to pass yet.
+console.log(student1.passExam('theory of computation', 100)); // Arthur Gyulabyan successfully passed all exams!
+console.log(student1.year); // graduated
 console.log(student1.toString()); // Arthur Gyulabyan, 22 years old.
