@@ -1,7 +1,7 @@
 // Create Person and Student classes.
 
 class Person {
-    constructor({firstName, lastName, gender, age} = {}) {
+    constructor({ firstName, lastName, gender, age } = {}) {
         this._firstName = firstName;
         this._lastName = lastName;
         this._gender = gender;
@@ -67,14 +67,14 @@ const rawUser1 = {
     firstName: 'Arthur',
     lastName: 'Gyulabyan',
     gender: 'male',
-    age: 22
+    age: 22,
 };
 
 let user1 = new Person(rawUser1);
-console.log(user1); // Name Surname, 23 years old.
+console.log(user1); // Arthur Gyulabyan, 22 years old.
 
 class Student extends Person {
-    constructor({firstName, lastName, gender, age, year, fee, program = []}) {
+    constructor({ firstName, lastName, gender, age, year, fee, program = [] }) {
         super(rawUser1);
         this._year = year;
         this._fee = fee;
@@ -86,10 +86,14 @@ class Student extends Person {
     }
 
     set year(value) {
-        if (typeof value !== 'number' || value < 1 || value > 6) {
+        if (typeof value !== 'number' || value < 1) {
             throw new Error('Year can be from 1 to 6!');
         }
-        
+
+        if (value === 7) {
+            console.log(`${this.firstName} ${this.lastName} graduated from university!`);
+        }
+
         this._year = value;
     }
 
@@ -108,13 +112,30 @@ class Student extends Person {
     get program() {
         return this._program;
     }
-    
+
     set program(value) {
         if (value.isArray === false) {
             throw new Error('Invalid program!');
         }
-        
+
         this._program = value;
+    }
+
+    isAllPassed() {
+        const lessonGrades = this.program.map((el) => el.grade);
+        let isPassed = true;
+
+        lessonGrades.forEach((el) => {
+            if (typeof el !== 'number' || el < 50) {
+                isPassed = false;
+            }
+        });
+
+        return isPassed;
+    }
+
+    toString() {
+        return super.toString();
     }
 }
 
@@ -123,15 +144,12 @@ const rawStudent1 = {
     lastName: 'Gyulabyan',
     gender: 'male',
     age: 22,
-    year: 1,
+    year: 6,
     fee: 1200,
     program: [
-        {programName: "math", grade: 10},
-        {programName: "english", grade: undefined},
-        {programName: "data structures", grade: undefined},
-        {programName: "theory of computation", grade: undefined},
+        { programName: 'math', grade: 10 },
+        { programName: 'english', grade: undefined },
+        { programName: 'data structures', grade: undefined },
+        { programName: 'theory of computation', grade: undefined },
     ],
 };
-
-const student1 = new Student(rawStudent1);
-console.log(student1);
