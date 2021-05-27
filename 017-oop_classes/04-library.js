@@ -127,3 +127,63 @@ class ReaderBook extends Book {
 const readerBook1 = new LibraryBook('The Old Man and the Sea', 'Ernest Hemingway', '12-04');
 console.log(readerBook1);
 console.log(readerBook1.author);
+
+class Reader {
+    constructor(firstName, lastName, books) {
+        this._firstName = firstName;
+        this._lastName = lastName;
+        this._books = books;
+        this.readerId = Reader.readerId;
+
+        Reader.readerId++;
+    }
+
+    static readerId = 0;
+
+    get firstName() {
+        return this._firstName;
+    }
+
+    set firstName(value) {
+        if (typeof value !== 'string' || value.length < 2) {
+            throw new Error('Invalid first name!');
+        }
+
+        this._firstName = value;
+    }
+
+    get lastName() {
+        return this._lastName;
+    }
+
+    set lastName(value) {
+        if (typeof value !== 'string' || value.length < 3) {
+            throw new Error('Invalid last name!');
+        }
+
+        this._firstName = value;
+    }
+
+    get books() {
+        return this._books;
+    }
+
+    set books(value) {
+        if(!Array.isArray(value)) {
+            throw new Error('Data about books is not represented!');
+        }
+
+        this._books = value;
+    }
+
+    borrowBook(book, library) {
+        if(library.doHaveBook(book) && book instanceof ReaderBook) {
+            this.books.push(book);
+        }
+    }
+
+    toString() {
+        return `${this.firstName} ${this.lastName}`;
+    }
+}
+
