@@ -86,3 +86,44 @@ class LibraryBook extends Book {
 const libraryBook1 = new LibraryBook('The Old Man and the Sea', 'Ernest Hemingway', 12);
 console.log(libraryBook1.increaseQuantityBy(12));
 console.log(libraryBook1.decreaseQuantityBy(24));
+
+class ReaderBook extends Book {
+    constructor(title, author, expirationDate) {
+        super(title, author);
+        this._bookId = Book.idCounter;
+        this._expirationDate = expirationDate;
+        this._isReturned = false;
+    }
+
+    get expirationDate() {
+        return this._expirationDate;
+    }
+
+    set expirationDate(value) {
+        if (typeof value !== 'string') {
+            throw new Error('Invalid expiration date!');
+        }
+
+        this._expirationDate = value;
+    }
+
+    get isReturned() {
+        return this._isReturned;
+    }
+
+    set isReturned(value) {
+        if (typeof value !== 'boolean') {
+            throw new Error('Value can be only true or false!');
+        }
+
+        this._isReturned = value;
+    }
+
+    toString() {
+        return `"${this.title}" - ${this.author}. Expiration date - ${this.expirationDate}`;
+    }
+}
+
+const readerBook1 = new LibraryBook('The Old Man and the Sea', 'Ernest Hemingway', '12-04');
+console.log(readerBook1);
+console.log(readerBook1.author);
