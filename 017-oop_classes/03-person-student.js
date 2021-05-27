@@ -92,6 +92,8 @@ class Student extends Person {
 
         if (value === 7) {
             console.log(`${this.firstName} ${this.lastName} graduated from university!`);
+            this._year = 'graduated';
+            return;
         }
 
         this._year = value;
@@ -168,3 +170,12 @@ const rawStudent1 = {
         { programName: 'theory of computation', grade: undefined },
     ],
 };
+
+const student1 = new Student(rawStudent1);
+console.log(student1.passExam('math', 70));
+console.log(student1.passExam('english', 90));
+console.log(student1.passExam('data structures', 90));
+console.log(student1.passExam('theory of computation', 10));
+console.log(student1.passExam('theory of computation', 100));
+console.log(student1.year); // 7
+console.log(student1.toString()); // Arthur Gyulabyan, 22 years old.
