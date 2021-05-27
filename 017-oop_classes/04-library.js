@@ -45,7 +45,7 @@ class LibraryBookBase extends Book {
 
 
 class LibraryBook extends Book {
-    constructor(title, author, quantity) {
+    constructor(title, author, quantity = 1) {
         super(title, author);
         this._bookId = Book.idCounter;
         this._quantity = quantity;
@@ -195,21 +195,25 @@ class Library {
     }
 
     addBook(newBook) {
-        if (this.doHaveBook(newBook)) {
-            newBook.quantity++;
+        const index = this.books.findIndex(book => book.isTheSameBook(newBook));
+        if (index === -1) {
+            const newLibraryBook = new LibraryBook(newBook.title, newBook.author);
+            this.books.push(newLibraryBook);
         } else {
-            this.books.push(newBook);
+            this.books[index].quantity++;
         }
-
+        
         return this.books;
     }
 
     addBooks(newBooks) {
-        newBooks.forEach(el => {
-            if (this.doHaveBook(el)) {
-                el.quantity++;
+        newBooks.forEach(newBook => {
+            const index = this.books.findIndex(book => book.isTheSameBook(newBook));
+            if (index === -1) {
+                const newLibraryBook = new LibraryBook(newBook.title, newBook.author);
+                this.books.push(newLibraryBook);
             } else {
-                this.books.push(el);
+                this.books[index].quantity++;
             }
         });
 
