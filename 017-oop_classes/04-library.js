@@ -187,3 +187,55 @@ class Reader {
     }
 }
 
+class Library {
+    constructor(books, readers) {
+        this._books = books;
+        this._readers = readers;
+    }
+
+    get books() {
+        return this._books;
+    }
+
+    get readers() {
+        return this._readers;
+    }
+
+    doHaveBook(requestedBook) {
+        return this.books.some(book => book.bookId === requestedBook.bookId);
+    }
+
+    addBook(newBook) {
+        if(this.doHaveBook(newBook)) {
+            newBook.quantity++;
+        } else {
+            this.books.push(newBook);
+        }
+
+        return this.books;
+    }
+
+    addBooks(newBooks) {
+        newBooks.forEach(el => {
+            if(this.doHaveBook(el)) {
+                el.quantity++;
+            } else {
+                this.books.push(el);
+            }
+        });
+
+        return this.books;
+    }
+
+    checkReaderId(readerId) {
+        return this.readers.some(reader => reader.readerId === readerId);
+    }
+
+    lendBook(book, readerId) {
+        if(this.doHaveBook(book) && this.checkReaderId(readerId)) {
+            return new ReaderBook(book.title, book.author, 10);
+        } 
+
+        return null;
+    }
+}
