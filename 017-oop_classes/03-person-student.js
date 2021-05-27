@@ -134,6 +134,21 @@ class Student extends Person {
         return isPassed;
     }
 
+    passExam(programName, grade) {
+        const index = this.program.findIndex((el) => el.programName === programName);
+
+        if (index !== -1) {
+            this.program[index].grade = grade;
+        }
+
+        if (this.isAllPassed()) {
+            this.year++;
+            return `${this.firstName} ${this.lastName} successfully passed all exams!`;
+        } else {
+            return `${this.firstName} ${this.lastName} has exam(s) to pass yet.`;
+        }
+    }
+
     toString() {
         return super.toString();
     }
