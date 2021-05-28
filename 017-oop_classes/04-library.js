@@ -1,13 +1,9 @@
 // Describe a model of library.
 
 class Book {
-    static idCounter = 0;
-
     constructor(title, author) {
         this._title = title;
         this._author = author;
-
-        Book.idCounter++;
     }
 
     get title() {
@@ -29,26 +25,26 @@ class Book {
 
 
 class LibraryBookBase extends Book {
-    constructor(title, author) {
+    constructor(title, author, bookId) {
         super(title, author);
-        this._bookId = Book.idCounter;
-    }
-
-    get bookId() {
-        return this._bookId;
+        this._bookId = bookId;
     }
 
     toString() {
-        return `"${this.title}" - ${this.author}. ID - ${this.bookId}`;
+        return `"${this.title}" - ${this.author}.`;
     }
 }
 
 
 class LibraryBook extends Book {
+    static idCounter = 0;
+
     constructor(title, author, quantity = 1) {
         super(title, author);
-        this._bookId = Book.idCounter;
+        this._bookId = LibraryBook.idCounter;
         this._quantity = quantity;
+
+        LibraryBook.idCounter++;
     }
 
     get quantity() {
@@ -61,6 +57,14 @@ class LibraryBook extends Book {
         }
 
         this._quantity = Math.trunc(value);
+    }
+
+    get bookId() {
+        return this._bookId;
+    }
+
+    set bookId(value) {
+        throw new Error('Book\'s ID can\'t be changed!');
     }
 
     increaseQuantityBy(amount) {
@@ -80,11 +84,19 @@ class LibraryBook extends Book {
 
 
 class ReaderBook extends Book {
-    constructor(title, author, expirationDate) {
+    constructor(title, author, bookId, expirationDate) {
         super(title, author);
-        this._bookId = Book.idCounter;
         this._expirationDate = expirationDate;
         this._isReturned = false;
+        this._bookId = bookId;
+    }
+
+    get bookId() {
+        return this._bookId;
+    }
+
+    set bookId(value) {
+        throw new Error('Book\'s ID can\'t be changed!');
     }
 
     get expirationDate() {
@@ -165,9 +177,19 @@ class Reader {
         this._books = value;
     }
 
+    get readerId() {
+        return this._readerId;
+    }
+
+    set readerId(value) {
+        throw new Error('ID cannot be changed!');
+    }
+
     borrowBook(book, library) {
-        if (library.doHaveBook(book) && book instanceof ReaderBook) {
-            this.books.push(book);
+        const requestedBook = library.lendBook(book, this.readerId);
+
+        if (requestedBook) {
+            this.books.push(requestedBook);
         }
     }
 
@@ -177,7 +199,11 @@ class Reader {
 }
 
 class Library {
-    constructor(books, readers) {
+    static getBookIndex(book, library) {
+        return library.books.findIndex(curBook => book.isTheSameBook(curBook));
+    }
+
+    constructor(books = [], readers = []) {
         this._books = books;
         this._readers = readers;
     }
@@ -186,37 +212,116 @@ class Library {
         return this._books;
     }
 
+    set books(value) {
+        let isLibraryBook;
+
+        try {
+            isLibraryBook = value.every(book => book instanceof LibraryBook);
+        } catch (e) {
+            throw new Error(e);
+        }
+
+        if (!isLibraryBook) {
+            throw new Error('Books don\'t belong to library.');
+        }
+
+        this._books = value;
+    }
+
     get readers() {
         return this._readers;
     }
 
+    set readers(value) {
+        let isReader;
+
+        try {
+            isReader = value.every(reader => reader instanceof Reader);
+        } catch (e) {
+            throw new Error(e);
+        }
+
+        if (!isReader) {
+            throw new Error('Specified value should contain readers!');
+        }
+
+        this._readers = value;
+    }
+
     doHaveBook(requestedBook) {
-        return this.books.some(book => book.bookId === requestedBook.bookId);
+        return this.books.some(book => book.isTheSameBook(requestedBook) && book.quantity > 0);
     }
 
     addBook(newBook) {
-        const index = this.books.findIndex(book => book.isTheSameBook(newBook));
+        const index = Library.getBookIndex(newBook, this);
         if (index === -1) {
             const newLibraryBook = new LibraryBook(newBook.title, newBook.author);
             this.books.push(newLibraryBook);
         } else {
-            this.books[index].quantity++;
+            this.books[index].increaseQuantityBy(1);
         }
-        
+
         return this.books;
     }
 
     addBooks(newBooks) {
         newBooks.forEach(newBook => {
-            const index = this.books.findIndex(book => book.isTheSameBook(newBook));
+            const index = Library.getBookIndex(newBook, this);
             if (index === -1) {
                 const newLibraryBook = new LibraryBook(newBook.title, newBook.author);
                 this.books.push(newLibraryBook);
             } else {
-                this.books[index].quantity++;
+                this.books[index].increaseQuantityBy(1);
             }
         });
 
         return this.books;
     }
+
+    checkReadersId(readerId) {
+        return this.readers.some(reader => reader.readerId === readerId);
+    }
+
+    lendBook(book, readerId) {
+        const index = Library.getBookIndex(book, this);
+        const foundBook = this.books[index];
+
+        if (!this.checkReadersId(readerId)) {
+            console.log('Library don\'t have such reader registered!');
+            return null;
+        }
+
+        if (!this.doHaveBook(book)) {
+            console.log('Library don\'t have the requested book!');
+            return null;
+        }
+
+        foundBook.decreaseQuantityBy(1);
+        return new ReaderBook(book.title, book.author, foundBook.bookId, '12-04');
+    }
 }
+
+const nationalLibrary = new Library();
+
+const book1 = new Book("You don't know JS", 'Kyle Simpson');
+const book2 = new Book("Harry Potter", 'J. K. Rowling');
+const book3 = new Book("The Old Man and the Sea", 'Ernest Hemingway');
+const book4 = new Book("Permanent Record", 'Edward Snowden');
+const book5 = new Book("The Lord of the Rings", 'J. R. R. Tolkien');
+
+const books = [book1, book2, book3, book4];
+
+const reader1 = new Reader('Arthur', 'Gyulabyan');
+const reader2 = new Reader('John', 'Doe');
+
+nationalLibrary.addBooks(books);
+nationalLibrary.readers.push(reader1);
+
+reader1.borrowBook(book3, nationalLibrary);
+reader1.borrowBook(book5, nationalLibrary);
+
+reader2.borrowBook(book1, nationalLibrary);
+
+console.log(reader1);
+console.log(reader2);
+console.log(nationalLibrary);
