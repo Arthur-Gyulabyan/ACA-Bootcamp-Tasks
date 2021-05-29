@@ -67,3 +67,26 @@ We can determine the status of an object by using the following predicate method
 
 -   `Object.isFrozen(obj)`  
     Determines if an object is frozen. Returns `true` if adding/removing/changing properties is forbidden, and all current properties are `configurable: false`, `writable: false`.
+
+## Property getters and setters
+
+Besides the usual ones, there are the second type of properties in objects. They are called _accessor properties_. They are essentially functions that execute on getting and setting a value. For external code, they look like a regular properties.  
+To specify getters and setters we should use `get` and `set` notations.
+
+```javascript
+let user = {
+    firstName: 'Arthur',
+    lastName: 'Gyulabyan',
+
+    get fullName() {
+        return `${this.firstName} ${this.lastName}`;
+    },
+
+    set propName(value) {
+        [this.firstName, this.lastName] = value.split('');
+    },
+};
+```
+
+If we try to get the `fullName` property form `user`, the getter will be executed, and if we try to assign a value to `fullName` the setter will be executed.  
+As we can see, we actually don't have property with key `fullName`, but instead we have accessor for it. Accessor properties give us a better control over the properties, so we can use them to do a lot of stuff with properties, do some validation and much more.
