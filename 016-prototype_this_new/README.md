@@ -14,7 +14,7 @@ const obj = new Object();
 ```
 
 As mentioned above, almost every value in JS is an instance of some constructor. Even primitive types have their parent constructor - `String`, `Number`, `Boolean`.
-Function itself is a special kind callable object, which is an instance of `Function` function constructor. So if a function is an object, it is logical that it can hold properties like simple objects. Every function has a special property `prototype`, which, in its turn, is an object. We can fill the `prototype` with any properties and methods. Then, if an object is created on the base of that function, that object will inherit all properties and methods provided in `prototype`.  
+Function itself is a special kind of callable object, which is an instance of `Function` function constructor. So if a function is an object, it is logical that it can hold properties like simple objects. Every function has a special property `prototype`, which, in its turn, is an object. We can fill the `prototype` with any properties and methods. Then, if an object is created on the base of that function, that object will inherit all properties and methods provided in `prototype`.  
 For example, `Array.prototype` holds all the well known methods, like `map()` or `reduce()` and every instance of `Array` inherits that methods.  
 Besides the build in function constructors, we can create our own constructors, and manually fill its `prototype` with any properties and methods, which will be inherited by instances.
 
@@ -41,8 +41,8 @@ The `new` keyword does the following four operations:
 4. Unless the function returns reference type, the new object will be returned.
 
 Let's understand every step. The first one is simple. What means link the prototype? As we know, every object in JS has special inner property `[[Prototype]]`, which is a link to another object or `null`. We also know that every function in JS has special `prototype` property, which is a simple object. So, in simple terms, the `new` keyword assigns the `__proto__` of the new object to the `prototype` of the constructor. So the new object will inherit all properties and methods from that `prototype`.  
-Then the `this` is bound to the newly created object. It means that the line `this.firstName = firstName` from the example above says - crate a property with key `firstName` in the new object and assign the value taken as an argument to it.  
-In the last step, if the function does not returns any reference type, then the created object will be returned.
+Then the `this` is bound to the newly created object. It means that the line `this.firstName = firstName` from the example above says - create a property with key `firstName` in the new object and assign the value taken as an argument to it.  
+In the last step, if the function does not return any reference type, then the created object will be returned.
 <br><br>
 Let's add a method to the `prototype` of the `User` from the example above:
 
