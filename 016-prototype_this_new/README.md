@@ -41,8 +41,27 @@ The `new` keyword does the following four operations:
 4. Unless the function returns reference type, the new object will be returned.
 
 Let's understand every step. The first one is simple. What means link the prototype? As we know, every object in JS has special inner property `[[Prototype]]`, which is a link to another object or `null`. We also know that every function in JS has special `prototype` property, which is a simple object. So, in simple terms, the `new` keyword assigns the `__proto__` of the new object to the `prototype` of the constructor. So the new object will inherit all properties and methods from that `prototype`.  
-Then the `this` is bound to the newly crated object. It means that the line `this.firstName = firstName` from the example above says - crate a property with key `firstName` in the new object and assign the value taken as an argument to it.  
-In the last step, if the function does not returns any reference type, then the created object will be returned.  
-<br>
+Then the `this` is bound to the newly created object. It means that the line `this.firstName = firstName` from the example above says - crate a property with key `firstName` in the new object and assign the value taken as an argument to it.  
+In the last step, if the function does not returns any reference type, then the created object will be returned.
+<br><br>
+Let's add a method to the `prototype` of the `User` from the example above:
+
+```javascript
+const User = function (firstName, lastName, age) {
+    this.firstName = firstName;
+    this.lastName = lastName;
+    this.age = age;
+};
+
+User.prototype.greeting = function () {
+    console.log(`Welcome, ${this.firstName}.`);
+};
+
+const arthur = new User('Arthur', 'Gyulabyan', 23);
+arthur.greeting(); // "Welcome, Arthur."
+```
+
+Now, every instance of `User` can use the `greeting()` method.
+<br><br><br>
 
 ![Prototype Chain](https://raw.githubusercontent.com/Arthur-Gyulabyan/ACA-Bootcamp-Tasks/main/016-prototype_this_new/prototype-chain.png 'Prototype Chain')
