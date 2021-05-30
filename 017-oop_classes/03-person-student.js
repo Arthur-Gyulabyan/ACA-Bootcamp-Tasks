@@ -124,16 +124,7 @@ class Student extends Person {
     }
 
     isAllPassed() {
-        const lessonGrades = this.program.map((el) => el.grade);
-        let isPassed = true;
-
-        lessonGrades.forEach((el) => {
-            if (typeof el !== 'number' || el < 50) {
-                isPassed = false;
-            }
-        });
-
-        return isPassed;
+        return this.program.every((el) => el.grade >= 50);
     }
 
     passExam(programName, grade) {
@@ -145,6 +136,7 @@ class Student extends Person {
 
         if (this.isAllPassed()) {
             this.year++;
+            this.program.forEach((el) => (el.grade = undefined));
             return `${this.firstName} ${this.lastName} successfully passed all exams!`;
         } else {
             return `${this.firstName} ${this.lastName} has exam(s) to pass yet.`;
