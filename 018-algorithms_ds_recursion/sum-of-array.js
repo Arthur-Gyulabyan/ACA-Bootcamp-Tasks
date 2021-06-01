@@ -5,7 +5,7 @@ const sum = (numbers) => {
         return 0;
     }
 
-    return numbers.pop() + sum(numbers);
+    return numbers[0] + sum(numbers.slice(1));
 };
 
 const numbers = [1, 2, 3, 4, 5];
