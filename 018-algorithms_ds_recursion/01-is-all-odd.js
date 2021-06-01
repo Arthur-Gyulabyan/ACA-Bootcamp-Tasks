@@ -1,7 +1,7 @@
 // Write a recursive function to determine whether all digits of the number are odd or not.
 
-function isAllOdd(number) {
-    function iter(number, bool) {
+const isAllOdd = (number) => {
+    const iter = (number, bool) => {
         const last = number % 10;
         bool = last % 2 === 1;
 
@@ -14,10 +14,10 @@ function isAllOdd(number) {
         }
 
         return iter((number - last) / 10, bool);
-    }
+    };
 
     return iter(number, true);
-}
+};
 
 console.log(isAllOdd(4211133)); // false
 console.log(isAllOdd(7791)); // true
