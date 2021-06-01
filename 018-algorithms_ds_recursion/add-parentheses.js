@@ -1,11 +1,7 @@
 // Add brackets between letters.
 
 const addBrackets = (str) => {
-    if (str.length === 0) {
-        return '';
-    }
-
-    if (str.length === 1 || str.length === 2) {
+    if (str.length < 3) {
         return str;
     }
 
