@@ -41,3 +41,8 @@ Sometimes it's said that class is a "syntactic sugar" over a function, because w
 ```javascript
 console.log(Car.toString()); // class Car { ... }
 ```
+
+2. A class definition sets `enumerable` flag to `false` for all methods in the `prototype`.
+3. By default, all code inside the class construct works in strict mode.
+
+There is also some other features in class syntax that we'll explore later.
