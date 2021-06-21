@@ -1,21 +1,28 @@
+// Buttons
 const start = document.querySelector('.start-btn');
 const stop = document.querySelector('.stop-btn');
 const reset = document.querySelector('.reset-btn');
-const timer = document.querySelector('.timer');
 
+// Timer items
 let hour = document.querySelector('#hour');
 let minute = document.querySelector('#minute');
 let sec = document.querySelector('#sec');
+
+let intervalId;
+
+// Value of each timer item
+let secInit = sec.textContent;
+let minuteInit = minute.textContent;
+let hourInit = hour.textContent;
 
 const decrease = () => {
     let secCounter = Number(sec.textContent);
     let minuteCounter = Number(minute.textContent);
     let hourCounter = Number(hour.textContent);
 
-
-    const id = setInterval(() => {
+    intervalId = setInterval(() => {
         if (secCounter === 0 && minuteCounter === 0 && hourCounter === 0) {
-            clearInterval(id);
+            clearInterval(intervalId);
             return;
         }
 
@@ -37,4 +44,17 @@ const decrease = () => {
     }, 1000);
 };
 
+const stopTimer = () => {
+    clearInterval(intervalId);
+};
+
+const resetTimer = () => {
+    sec.textContent = secInit;
+    minute.textContent = minuteInit;
+    hour.textContent = hourInit;
+    clearInterval(intervalId);
+};
+
 start.addEventListener('click', decrease);
+stop.addEventListener('click', stopTimer);
+reset.addEventListener('click', resetTimer);
