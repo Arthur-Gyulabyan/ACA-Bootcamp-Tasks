@@ -19,6 +19,16 @@ button:hover {
     cursor: pointer;
 }
 
+input::-webkit-outer-spin-button,
+input::-webkit-inner-spin-button {
+    -webkit-appearance: none;
+    margin: 0;
+}
+
+input[type=number] {
+    -moz-appearance: textfield;
+}
+
 .wrapper {
     height: 200px;
     width: 400px;
@@ -84,3 +94,25 @@ button:hover {
 .timer {
     font-size: 34px;
 }
+
+.input {
+    display: none;
+}
+
+.timer input {
+    /*display: none;*/
+    font-family: inherit;
+    padding: 0;
+    width: 34px;
+    height: 38px;
+    font-size: 34px;
+    border: none;
+    outline: none;
+}
+
+/*.confirm {*/
+/*    padding: 8px 16px;*/
+/*    background-color: green;*/
+/*}*/
+
+
