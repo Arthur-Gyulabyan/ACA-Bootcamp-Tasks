@@ -166,6 +166,11 @@ sec.addEventListener('click', () => {
         event.target.previousElementSibling.style.display = 'inline';
         event.target.classList.add('input');
         event.target.previousElementSibling.textContent = event.target.value;
+
+        // Remember new values to get on reset.
+        secInit = sec.textContent;
+        minuteInit = minute.textContent;
+        hourInit = hour.textContent;
     });
 });
 
