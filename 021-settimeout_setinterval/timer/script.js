@@ -42,13 +42,20 @@ const decrease = () => {
 
         sec.textContent = String(secCounter - 1).length === 2 ? String(--secCounter) : `0${String(--secCounter)}`;
     }, 1000);
+
+    start.removeEventListener('click', decrease);
+
 };
 
 const stopTimer = () => {
+    start.addEventListener('click', decrease);
+
     clearInterval(intervalId);
 };
 
 const resetTimer = () => {
+    start.addEventListener('click', decrease);
+
     sec.textContent = secInit;
     minute.textContent = minuteInit;
     hour.textContent = hourInit;
@@ -64,7 +71,6 @@ reset.addEventListener('click', resetTimer);
 const hourInput = document.querySelector('.hour-input');
 const minuteInput = document.querySelector('.minute-input');
 const secInput = document.querySelector('.sec-input');
-const confirm = document.querySelector('.confirm');
 
 
 // Setting input value's maximum length to 2
