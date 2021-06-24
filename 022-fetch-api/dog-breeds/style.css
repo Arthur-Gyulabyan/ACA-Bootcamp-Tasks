@@ -1,0 +1,66 @@
+* {
+    margin: 0;
+    padding: 0;
+
+    box-sizing: border-box;
+}
+
+html {
+    font-size: 16px;
+}
+
+body {
+    margin: 0;
+    padding: 0;
+    text-align: center;
+}
+
+.box select {
+    background-color: #0563af;
+    color: white;
+    padding: 12px;
+    margin-top: 1rem;
+    width: 250px;
+    border: none;
+    font-size: 20px;
+    box-shadow: 0 5px 25px rgba(0, 0, 0, 0.2);
+    -webkit-appearance: none;
+    appearance: none;
+    outline: none;
+    background-image: url("data:image/svg+xml;utf8,<svg fill='black' height='24' viewBox='0 0 24 24' width='24' xmlns='http://www.w3.org/2000/svg'><path d='M7 10l5 5 5-5z'/><path d='M0 0h24v24H0z' fill='none'/></svg>");
+    background-repeat: no-repeat;
+    background-position-x: 100%;
+    background-position-y: 5px;
+    text-align: center;
+}
+
+
+.box:hover::before {
+    color: rgba(255, 255, 255, 0.6);
+    background-color: rgba(255, 255, 255, 0.2);
+}
+
+.box select option {
+    padding: 30px;
+}
+
+.img-container {
+    display: flex;
+    flex-wrap: wrap;
+    margin: 50px;
+    padding: 18px;
+    border: 3px solid crimson;
+}
+
+.img-container img {
+    width: 100%;
+    margin: 1rem;
+    flex: 1;
+    height: 400px;
+    object-fit: cover;
+    transition: 0.5s;
+}
+
+.img-container img:hover {
+    transform: scale(1.03);
+}
