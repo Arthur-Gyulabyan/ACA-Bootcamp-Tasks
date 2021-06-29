@@ -1,0 +1,111 @@
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
+
+html {
+    font-family: "Roboto", sans-serif;
+    font-size: 16px;
+    line-height: 1.2;
+}
+
+body {
+    background-color: #eee;
+}
+
+button,
+input {
+    all: unset;
+}
+
+button:hover {
+    cursor: pointer;
+}
+
+.nav-bar {
+    display: flex;
+    flex-direction: row;
+    justify-content: flex-start;
+    background: linear-gradient(0.25turn, rgba(23, 23, 23, 0.37), rgba(104, 103, 103, 0.39), rgba(156, 155, 155, 0.54));
+}
+
+.nav-left {
+    margin: 1rem 2rem;
+}
+
+.main-header {
+    font-family: "Playfair Display", serif;
+    color: #444444;
+    background-color: #bbb;
+    border-radius: 2rem;
+    font-size: 2rem;
+    padding: 0.35rem 1rem;
+    transition: 0.3s;
+}
+
+.main-header:hover {
+    color: #222;
+    background-color: #BBBBBB52;
+    cursor: pointer;
+}
+
+.search-container {
+    display: flex;
+    justify-content: center;
+    margin: 1rem;
+}
+
+.search-form {
+    position: relative;
+}
+
+.search-field {
+    font-size: 1.4rem;
+    padding: 0.5rem 2rem;
+    width: 30rem;
+    border: 1px solid #ccc;
+    border-radius: 1.5rem;
+    background-color: #fff3f1;
+    vertical-align: middle;
+}
+
+.search-field::placeholder {
+    color: #aaa;
+}
+
+.search-field::-webkit-search-cancel-button{
+    position:relative;
+    right:1.5rem;
+
+    -webkit-appearance: none;
+    height: 1.5rem;
+    width: 1.5rem;
+    border-radius: 50em;
+    background: url(https://pro.fontawesome.com/releases/v5.10.0/svgs/duotone/times-circle.svg) no-repeat 50% 50% crimson;
+    background-size: cover;
+    opacity: 0;
+    pointer-events: none;
+}
+
+.search-field:focus::-webkit-search-cancel-button {
+    opacity: .9;
+    pointer-events: all;
+}
+
+.search-button {
+    position: relative;
+    top: 3px;
+    right: 49px;
+    font-size: 1.4rem;
+    color: #1b6309;
+    padding: 0.5rem 0.7rem;
+    border-radius: 50%;
+    background-color: #fff3f1;
+    transition: 0.2s;
+}
+
+.search-button:hover {
+    background-color: #1b6309;
+    color: #fff3f1;
+}
