@@ -109,3 +109,30 @@ button:hover {
     background-color: #1b6309;
     color: #fff3f1;
 }
+
+.info-container {
+    width: 45%;
+    margin: auto;
+}
+
+
+table {
+    font-family: 'Roboto', sans-serif;
+    border-collapse: collapse;
+    margin: 2rem 0;
+    width: 100%;
+}
+
+td, th {
+    border: 1px solid #dddddd;
+    text-align: left;
+    padding: 0.6rem;
+}
+
+tr:nth-child(even) {
+    background-color: #ccc;
+}
+
+.film-title {
+    font-weight: bold;
+}
